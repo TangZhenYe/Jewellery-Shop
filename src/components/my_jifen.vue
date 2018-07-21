@@ -57,6 +57,9 @@ export default {
 	},
 	methods: {
 	},
+	mounted () {
+		this.getShare()
+	},
 }
 </script>
 

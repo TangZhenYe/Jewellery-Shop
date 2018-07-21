@@ -1,21 +1,23 @@
 <template>
-	<div class="box my_collect" :class="{'get-scroll': showEdit}">
-		<div class="gray-666 tl top-box">
-			<div ref='allSelect' class="check-box" @click='checkAll($event)'></div>
-			全选
-			<div class="fr" @click='operation'>{{ operationName }}</div>
-		</div>	
-		<div class="list">
-			<div :class="{'per-list-on': showEdit }" @click="goCategoryGoodsDetail(list.goods_id)" class="per-list" v-for="(list, i) in lists">
-				<img class="per-list-img" :class="{'per-list-img-on': showEdit }" :src="urlPrefix + list.goods.img_thumb">
-				<h2 class="tl ellip per-list-name">
-					{{ list.goods.goods_name }}
-				</h2>
-				<template v-if="showEdit">
-					<div ref="perListCheck" class="tc check-box-one" @click.stop="check($event, list.goods_id)">
-					</div>
-				</template>
-				<p class="tl red per-list-money">￥{{ list.goods.market_price }}</p>
+	<div>
+		<div class="my_collect" :class="{'get-scroll': showEdit}">
+			<div class="gray-666 tl top-box">
+				<div ref='allSelect' class="check-box" @click='checkAll($event)'></div>
+				全选
+				<div class="fr" @click='operation'>{{ operationName }}</div>
+			</div>	
+			<div class="list">
+				<div :class="{'per-list-on': showEdit }" @click="goCategoryGoodsDetail(list.goods_id)" class="per-list" v-for="(list, i) in lists">
+					<img class="per-list-img" :class="{'per-list-img-on': showEdit }" :src="urlPrefix + list.goods.img_thumb">
+					<h2 class="tl ellip per-list-name">
+						{{ list.goods.goods_name }}
+					</h2>
+					<template v-if="showEdit">
+						<div ref="perListCheck" class="tc check-box-one" @click.stop="check($event, list.goods_id)">
+						</div>
+					</template>
+					<p class="tl red per-list-money">￥{{ list.goods.market_price }}</p>
+				</div>
 			</div>
 		</div>
 		<template v-if="showEdit">
@@ -81,6 +83,8 @@ export default {
 				this.$refs.allSelect.style.backgroundColor = color
 			}
 			e.target.style.backgroundColor = color
+
+			console.log(this.deleteLists)
 		},
 		checkAll (e) {
 			if (!this.showEdit) {
@@ -102,6 +106,7 @@ export default {
 			for (let v of perListCheck) {
 				v.style.backgroundColor = color
 			}
+			console.log(this.deleteLists)
 		},
 		operation () {
 			let that = this
@@ -132,7 +137,7 @@ export default {
 				this.showDialog('请选择要删除的商品!')
 				return
 			}
-			that.c_ajax({obj}, 'api.php?c=UserCollect&a=delete', function (value) {
+			that.c_ajax(obj, 'api.php?c=UserCollect&a=delete', function (value) {
 				that.showDialog('已取消收藏!')
 				setTimeout(function () {
 					that.getLists()
@@ -147,12 +152,21 @@ export default {
 			})
 		},
 	},
+	mounted () {
+		this.getShare()
+	},
 }
 </script>
 
 <style scoped>
 .my_collect {
-	bottom: 42px;
+	bottom: 0;
+	position: absolute;
+	top: 43px;
+	left: 0;
+	width: 100%;
+	background-color: #F3F5F7;
+	overflow-y: scroll;
 	touch-action: pan-y;
 	-webkit-overflow-scrolling: touch;
 }
@@ -262,7 +276,7 @@ export default {
 }
 
 .get-scroll {
-	overflow-y: scroll;
+	bottom: 42px;
 }
 
 </style>

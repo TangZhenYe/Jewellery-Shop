@@ -77,6 +77,9 @@ export default {
 			}
 		},
 	},
+	mounted () {
+		this.getShare()
+	},
 }
 </script>
 

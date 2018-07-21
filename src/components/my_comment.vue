@@ -87,13 +87,16 @@ export default {
 				if (value.data.status === 10001) {
 					that.showDialog('发布成功!')
 					setTimeout(function () {
-						that.toBack()
+						that.goBack()
 					}, 1500)
 				} else if (value.data.status === 10002) {
 					that.showDialog('发布失败!')
 				}
 			})
 		},
+	},
+	mounted () {
+		this.getShare()
 	},
 }
 </script>

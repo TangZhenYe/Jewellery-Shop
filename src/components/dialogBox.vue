@@ -1,9 +1,9 @@
 <template>
   <div v-show="visible">
-   <div class="dialog-tips dialog-center">
-    <div>{{ message }}</div>
+    <div class="dialog-tips dialog-center">
+      <div>{{ message }}</div>
+    </div>
   </div>
-</div>
 
 
 </template>

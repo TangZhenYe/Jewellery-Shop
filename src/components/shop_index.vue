@@ -1,6 +1,11 @@
 <template>
   <div class="jewel-index white-b">
-    <headerBox :title-msg='titleMsg' ></headerBox>
+    <div class="white tc header-box">
+      <div class="arrow-left-icon">
+        <mu-icon @click='goBack()' class="icon-arrow-back" value="arrow_back"/>
+      </div>
+      <span>首页</span>
+    </div>
     <div class="header-box-2 tc white-b">
       <mu-icon @click="goCategoryRecommended()" class="icon-search" value="search"/>
       <img @click='goLocation()' class="logo" src="static/img/logo.png"/>
@@ -66,7 +71,6 @@ export default {
   },
   data () {
     return {
-      titleMsg: '首页',
       flag: true,
       loadMsg: '加载更多',
       newGoodsSaleUrl: '',
@@ -91,8 +95,8 @@ export default {
     }
   },
   created () {
+    console.log('首页 created')
     let that = this
-    that.$store.commit('updateTitleMsg', { title_msg: '首页', })
     that.c_ajax({}, 'api.php?c=User&a=is_subscribe', function (value) {
       that.followPublic = (value.data.is_subscribe === 0) ? true : false
     })
@@ -100,6 +104,9 @@ export default {
     that.c_ajax({cate_id: 1}, 'api.php?c=ad&a=lists', function (value) {
       if (value.data.status === 10001) {
         that.newGoodsSaleUrl = that.urlPrefix + value.data.lists[0]['img']
+
+        that.$store.commit('updateScopeImgUrl', {scopeImgUrl: that.newGoodsSaleUrl})
+
         that.newGoodsSaleTitle = value.data.lists[0]['title']
       }
     })
@@ -163,6 +170,7 @@ export default {
     })
   },
   mounted () {
+    this.getShare()
     window.addEventListener('scroll', this.handleScroll)
   },
   activated () {
@@ -188,13 +196,11 @@ export default {
         return
       }
       let that = this
-      that.c_ajax({num: that.num, p: that.count}, 'api.php?c=ShopGoods&a=lists', function (value) {
-        let add = (that.count - 2) * that.num
+      that.c_ajax({num: that.num, p: that.count++}, 'api.php?c=ShopGoods&a=lists', function (value) {
         if (value.data.status === 10001) {
           for (let v of value.data.lists) {
             that.lastLittleSortContents.push(v)
           }
-          that.count++
         } else {
           that.loadMsg = '没有更多商品了'
         }
@@ -211,6 +217,10 @@ export default {
     handleScroll () {
       this.scrollTop = $(window).scrollTop()
       this.fixedLittleSort = (this.scrollTop >= 650) ? true : false
+      console.log(this.scrollTop)
+      // if (this.scrollTop === 3400) {
+      //   this.loadMore()
+      // }
     },
     getSelectSort (parentId) {
       if (this.scrollTop >= 700) {
@@ -238,6 +248,32 @@ export default {
 .jewel-index {
   margin-top: 128px;
   margin-bottom: 50px;
+}
+.header-box {
+  height: 43px;
+  border-bottom: 1px solid #000;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: #444;
+  font-size: 16px;
+  line-height: 43px;
+  z-index: 999;
+}
+.arrow-left-icon {
+  position: absolute;
+  left: 13px;
+  top: 8.5px;
+  width: 24px;
+  height: 24px;
+}
+.icon-arrow-back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 .header-box-2 {
   position: fixed;

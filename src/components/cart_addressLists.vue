@@ -1,23 +1,25 @@
 <template>
-	<div class="box cart_addressLists">
-		<div class="list">
-			<div :id="addressList.id" class="per-list" v-for="(addressList, i) in addressLists" @click='changeDefault(addressList.id)'>
-				<div class="per-list-box">
-					<p class="per-list-info">
-						<span class="fr">{{ addressList.phone }}</span>
-						<span class="fl">收货人：{{ addressList.name }}</span>
-					</p>
-					<p class="fl per-list-address">
-						{{ addressList.address }}
-					</p>
-				</div>
-				<div class="operation">
-					<div class="tl fl width-50per">
-						<label :class="{'check-picture': Number(addressList.type) === 1 }" class="default-address">设为默认地址</label>
+	<div>
+		<div class="cart_addressLists">
+			<div class="list">
+				<div :id="addressList.id" class="per-list" v-for="(addressList, i) in addressLists" @click='changeDefault(addressList.id)'>
+					<div class="per-list-box">
+						<p class="per-list-info">
+							<span class="fr">{{ addressList.phone }}</span>
+							<span class="fl">收货人：{{ addressList.name }}</span>
+						</p>
+						<p class="fl per-list-address">
+							{{ addressList.address }}
+						</p>
 					</div>
-					<div class="fl width-50per">
-						<span class="edit-delete-btn" @click.stop="deleteAddress(addressList.id)">删除</span>
-						<span class="edit-delete-btn" @click.stop='goCartEditAddress(addressList.is_receive, addressList.id)'>编辑</span>
+					<div class="operation">
+						<div class="tl fl width-50per">
+							<label :class="{'check-picture': Number(addressList.type) === 1 }" class="default-address">设为默认地址</label>
+						</div>
+						<div class="fl width-50per">
+							<span class="edit-delete-btn" @click.stop="deleteAddress(addressList.id)">删除</span>
+							<span class="edit-delete-btn" @click.stop='goCartEditAddress(addressList.is_receive, addressList.id)'>编辑</span>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -38,6 +40,9 @@ export default {
 		}
 	},
 	components: {
+	},
+	mounted () {
+		this.getShare()
 	},
 	created () {
 		this.$store.commit('updateTitleMsg', { title_msg: '地址管理', })
@@ -65,7 +70,7 @@ export default {
 			that.c_ajax({post: post, }, 'api.php?c=UserAddress&a=add', function (value) {
 				if (value.data.status === 10001) {
 					that.setLocalObj('addressList_' + that.address_id, { provinceLists: that.provinceLists, cityLists: that.cityLists, areaLists: that.areaLists, })
-					that.toBack()
+					that.goBack()
 				} else {
 					that.showDialog(value.data.msg)
 				}
@@ -104,6 +109,12 @@ export default {
 
 .cart_addressLists {
 	bottom: 44px;
+	position: absolute;
+	top: 43px;
+	left: 0;
+	width: 100%;
+	background-color: #F3F5F7;
+	overflow-y: scroll;
 	touch-action: pan-y;
 	-webkit-overflow-scrolling: touch;
 }

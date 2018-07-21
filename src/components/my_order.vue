@@ -23,30 +23,30 @@
 					</div>
 				</div>
 				<div class="have-status">
-					<div @click="cancelOrder(list.order_id)" v-if="list.pay_status === '0'" class="white btn-style fr">取消订单</div>
-					<div @click='buyGoods(list.order_id)' v-if="list.pay_status === '0'" class="white btn-style fr">去付款</div>
-					<div v-if="list.pay_status === '1' && list.shipping_status === '0'" class="white btn-style fr">待发货</div>
-					<div v-if="list.pay_status === '1' && list.shipping_status === '0' && list.back_status === '0'" class="white btn-style fr" @click="goMyApplySale(list.order_id, 1)">去退款</div>
-					<div class="white btn-style fr" v-if="list.pay_status === '1' && list.shipping_status === '1' && list.back_status === '1'">
+					<div @click="cancelOrder(list.order_id)" v-if="list.pay_status === '0'" class="white red-b btn-style fr">取消订单</div>
+					<div @click='buyGoods(list.order_id)' v-if="list.pay_status === '0'" class="white red-b btn-style fr">去付款</div>
+					<div v-if="list.pay_status === '1' && list.shipping_status === '0'" class="white red-b btn-style red-b-ok fr">待发货</div>
+					<div v-if="list.pay_status === '1' && list.shipping_status === '0' && list.back_status === '0'" class="white red-b btn-style fr" @click="goMyApplySale(list.order_id, 1)">去退款</div>
+					<div class="white red-b btn-style red-b-ok fr" v-if="list.pay_status === '1' && list.shipping_status === '1' && list.back_status === '1'">
 						售后申请中，请等候
 					</div>
-					<div @click="goMyBackGoods(list.order_id)" class="white btn-style fr" v-if="list.pay_status === '1' && list.shipping_status === '1' && list.back_status === '2'">
+					<div @click="goMyBackGoods(list.order_id)" class="white red-b btn-style red-b fr" v-if="list.pay_status === '1' && list.shipping_status === '1' && list.back_status === '2'">
 						卖家允许退款退货，去退货
 					</div>
-					<div class="white btn-style fr" v-if="list.pay_status === '1' && list.shipping_status === '1' && list.back_status === '3'">
+					<div class="white btn-style red-b red-b-ok fr" v-if="list.pay_status === '1' && list.shipping_status === '1' && list.back_status === '3'">
 						卖家拒绝退款退货
 					</div>
-					<div class="white btn-style fr" v-if="list.pay_status === '1' && list.shipping_status === '1' && list.back_status === '4'">
+					<div class="white red-b btn-style red-b-ok fr" v-if="list.pay_status === '1' && list.shipping_status === '1' && list.back_status === '4'">
 						买家已发货
 					</div>
-					<div class="white btn-style fr" v-if="list.pay_status === '1' && list.shipping_status === '1' && list.back_status === '5'">
+					<div class="white red-b btn-style red-b-ok fr" v-if="list.pay_status === '1' && list.shipping_status === '1' && list.back_status === '5'">
 						退货完成
 					</div>
-					<div @click="goMyApplySale(list.order_id)" v-if="list.pay_status === '1' && list.shipping_status === '1' && list.back_status === '0'" class="white btn-style fr">申请售后</div>
-					<div @click="goMyShipping(list.order_id)" v-if="list.pay_status === '1' && list.shipping_status === '1' && list.back_status === '0'" class="white btn-style fr">查看物流</div>
-					<div v-if="list.pay_status === '1' && list.shipping_status === '2' && list.comment_status === '1'" class="white btn-style fr">已完成</div>
-					<div @click="getGoods(list.order_id)" v-if="list.pay_status === '1' && list.shipping_status === '1' && list.back_status === '0'" class="white btn-style fr">确认收货</div>
-					<div @click="goMyComment(list.order_id)" v-if="list.pay_status === '1' && list.shipping_status === '2' && list.comment_status === '0'" class="white btn-style fr">去评价</div>
+					<div @click="goMyApplySale(list.order_id)" v-if="list.pay_status === '1' && list.shipping_status === '1' && list.back_status === '0'" class="white red-b btn-style fr">申请售后</div>
+					<div @click="goMyShipping(list.order_id)" v-if="list.pay_status === '1' && list.shipping_status === '1' && list.back_status === '0'" class="white red-b btn-style fr">查看物流</div>
+					<div v-if="list.pay_status === '1' && list.shipping_status === '2' && list.comment_status === '1'" class="white btn-style red-b red-b-ok fr">已完成</div>
+					<div @click="getGoods(list.order_id)" v-if="list.pay_status === '1' && list.shipping_status === '1' && list.back_status === '0'" class="white red-b btn-style fr">确认收货</div>
+					<div @click="goMyComment(list.order_id)" v-if="list.pay_status === '1' && list.shipping_status === '2' && list.comment_status === '0'" class="white red-b btn-style fr">去评价</div>
 				</div>
 			</div>
 		</div>
@@ -142,6 +142,9 @@ export default {
 			})
 		},
 	},
+	mounted () {
+		this.getShare()
+	},
 }
 </script>
 
@@ -235,7 +238,6 @@ export default {
 .btn-style {
 	border-radius: 5px;
 	margin-right: 5px;
-	background-color: #e4393c;
 	padding: 0 20px;
 }
 

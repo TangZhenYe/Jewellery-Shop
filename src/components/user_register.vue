@@ -193,6 +193,9 @@ export default {
 			this.canHide = true
 		},
 	},
+	mounted () {
+		this.getShare()
+	},
 }
 </script>
 

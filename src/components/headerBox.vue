@@ -1,6 +1,11 @@
 <template>
 	<div class="white tc header-box">
-		<div class="arrow-left-icon"><mu-icon @click='toBack()' class="icon-arrow-back" value="arrow_back"/> </div>
+		<div class="arrow-left-icon">
+			<mu-icon @click='goBack()' class="icon-arrow-back" value="arrow_back"/>
+		</div>
+		<div @click="goHome()" class="white font-size-16 pos-absolute" style="right: 13px;">
+			首页
+		</div>
 		<span>{{ titleMsg }}</span>
 	</div>
 </template>

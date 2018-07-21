@@ -1,5 +1,5 @@
 <template>
-	<div class="box category_recommended">
+	<div class="category_recommended white-b">
 		<div class="search-goods-box">
 			<div class="search-goods">
 				<input v-model.trim="searchWord" @change="searchGoods()" type="text" placeholder="搜索商品" class="search-goods-input black">
@@ -96,11 +96,20 @@ export default {
 			})
 		},
 	},
+	mounted () {
+		this.getShare()
+	},
 }
 </script>
 
 <style scoped>
 .category_recommended {
+	position: absolute;
+	top: 43px;
+	left: 0;
+	width: 100%;
+	bottom: 0;
+	overflow-y: scroll;
 	touch-action: pan-y;
 	-webkit-overflow-scrolling: touch;
 }

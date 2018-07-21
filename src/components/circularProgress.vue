@@ -1,5 +1,5 @@
 <template>
-	<mu-circular-progress v-show="canShowLoad" class="user-mu-circular-progress circularProgress" :size="40" :strokeWidth="5" color="gray" />
+	<mu-circular-progress v-show="canShowLoad" class="user-mu-circular-progress circularProgress" :size="30" :strokeWidth="3" color="gray" />
 </template>
 <script>
 

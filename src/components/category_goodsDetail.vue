@@ -169,6 +169,7 @@ export default {
 		})
 	},
 	mounted () {
+		this.getShare()
 		let that = this
 		that.$store.commit('updateTitleMsg', { title_msg: '商品详情', })
 		this.goods_id = this.$route.query.goods_id
@@ -289,6 +290,7 @@ export default {
 	left: 0;
 	width: 100%;
 	background-color: #F3F5F7;
+	overflow-y: scroll;
 	touch-action: pan-y;
 	-webkit-overflow-scrolling: touch;
 }

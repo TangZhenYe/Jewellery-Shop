@@ -1,76 +1,78 @@
 <template>
-	<div class="box cart_confirmOrder">
-		<div v-if="!showSelectAddress">
-			<div @click="goCartAddressLists(1)">
-				<div class="reci-info">
-					收件人: {{ name }}
-					<span class="fr">{{ phone }}</span>
-				</div>
-				<div class="tl reci-info-2">
-					<img class="locat" src="static/img/location.png">
-					{{ address }}
-					<img class="arrow" src="static/img/arrow_right.png" />
-				</div>
-			</div>
-			<img class="border-box" src="static/img/border.png">
-		</div>
-		<div v-if="showSelectAddress">
-			<div class="select-address" @click="goCartAddressLists(1)">
-				请选择收货地址
-				<img class="icon-style2" src="static/img/arrow_right.png" />
-			</div>
-		</div>
-		<div class="content-box">
-			<div class="get-goods">
-				您所选购的商品
-			</div>
-			<div class="goods-detail-box">
-				<div v-for="goodsList in goodsLists" class="goods-detail">
-					<img :src="urlPrefix + goodsList.img_thumb">
-					<div class="ellip tl goods-name">
-						{{ goodsList.goods_name }}
+	<div>
+		<div class="cart_confirmOrder">
+			<div v-if="!showSelectAddress">
+				<div @click="goCartAddressLists(1)">
+					<div class="reci-info">
+						收件人: {{ name }}
+						<span class="fr">{{ phone }}</span>
 					</div>
-					<div class="goods-money">
+					<div class="tl reci-info-2">
+						<img class="locat" src="static/img/location.png">
+						{{ address }}
+						<img class="arrow" src="static/img/arrow_right.png" />
+					</div>
+				</div>
+				<img class="border-box" src="static/img/border.png">
+			</div>
+			<div v-if="showSelectAddress">
+				<div class="select-address" @click="goCartAddressLists(1)">
+					请选择收货地址
+					<img class="icon-style2" src="static/img/arrow_right.png" />
+				</div>
+			</div>
+			<div class="content-box">
+				<div class="get-goods">
+					您所选购的商品
+				</div>
+				<div class="goods-detail-box">
+					<div v-for="goodsList in goodsLists" class="goods-detail">
+						<img :src="urlPrefix + goodsList.img_thumb">
+						<div class="ellip tl goods-name">
+							{{ goodsList.goods_name }}
+						</div>
+						<div class="goods-money">
 
-						￥{{ (Number(goodsList.promote_price) === 0) ? Number(goodsList.shop_price).toFixed(2) : Number(goodsList.promote_price).toFixed(2) }}
-					</div>
-					<div class="goods-number">
-						x{{ goodsList.amount }}
-					</div>
-					<div v-show="share_grade_id && share_grade_id !== 0" class="black give-points">
-						代理折扣: {{ Number(goodsList.share_discount * 100).toFixed(0) }}%
-						折后价格: ￥{{ Number(goodsList.price).toFixed(2) }}
-					</div>
-					<div v-show="!share_grade_id" class="black give-points">
-						积分: {{ parseInt(goodsList.give_points) }}
-					</div>
+							￥{{ (Number(goodsList.promote_price) === 0) ? Number(goodsList.shop_price).toFixed(2) : Number(goodsList.promote_price).toFixed(2) }}
+						</div>
+						<div class="goods-number">
+							x{{ goodsList.amount }}
+						</div>
+						<div v-show="share_grade_id && share_grade_id !== 0" class="black give-points">
+							代理折扣: {{ Number(goodsList.share_discount * 100).toFixed(0) }}%
+							折后价格: ￥{{ Number(goodsList.price).toFixed(2) }}
+						</div>
+						<div v-show="!share_grade_id" class="black give-points">
+							积分: {{ parseInt(goodsList.give_points) }}
+						</div>
 
+					</div>
+					<div class="bor-top list gray-666">
+						<div class="per-list gray-666" @click="openDialog()">
+							<input placeholder="选填:给商家留言(45字以内)" v-model="leaveMessage" class="tl ellip leave-message-input fl">
+							<img class="fr img-style" src="static/img/arrow_right.png" />
+						</div>
+						<div class="gray-444 per-list">
+							<span class="fl">商品金额</span>
+							<span class="fr">￥{{ Number(total_goods_price).toFixed(2) }}</span>
+						</div>
+						<div class="gray-444 per-list">
+							<span class="fl">运费</span>
+							<span class="fr">{{ shipping_fee }}元</span>
+						</div>
+					</div>
 				</div>
-				<div class="bor-top list gray-666">
-					<div class="per-list gray-666" @click="openDialog()">
-						<input placeholder="选填:给商家留言(45字以内)" v-model="leaveMessage" class="tl ellip leave-message-input fl">
-						<img class="fr img-style" src="static/img/arrow_right.png" />
+				<div class="list gray-666">
+					<template v-if="!share_grade_id">
+						<div class="per-list" @click='changePayImage($event)'>
+							<span class="fl">可用积分抵扣 <span class="red">{{ Number(exchange_price2).toFixed(2) }}</span> 元</span>
+							<img class="fr" :src="payPicture3" />
+						</div>
+					</template>
+					<div class="per-list">
+						<span class="fl">微信支付</span>
+						<img class="fr" :src="payPicture" />
 					</div>
-					<div class="gray-444 per-list">
-						<span class="fl">商品金额</span>
-						<span class="fr">￥{{ Number(total_goods_price).toFixed(2) }}</span>
-					</div>
-					<div class="gray-444 per-list">
-						<span class="fl">运费</span>
-						<span class="fr">{{ shipping_fee }}元</span>
-					</div>
-				</div>
-			</div>
-			<div class="list gray-666">
-				<template v-if="!share_grade_id">
-					<div class="per-list" @click='changePayImage($event)'>
-						<span class="fl">可用积分抵扣 <span class="red">{{ Number(exchange_price2).toFixed(2) }}</span> 元</span>
-						<img class="fr" :src="payPicture3" />
-					</div>
-				</template>
-				<div class="per-list">
-					<span class="fl">微信支付</span>
-					<img class="fr" :src="payPicture" />
 				</div>
 			</div>
 		</div>
@@ -122,6 +124,9 @@ export default {
 		}
 	},
 	components: {
+	},
+	mounted () {
+		this.getShare()
 	},
 	created () {
 		let that = this
@@ -249,6 +254,12 @@ export default {
 <style scoped>
 .cart_confirmOrder {
 	bottom: 44px;
+	position: absolute;
+	top: 43px;
+	left: 0;
+	width: 100%;
+	background-color: #F3F5F7;
+	overflow-y: scroll;
 	touch-action: pan-y;
 	-webkit-overflow-scrolling: touch;
 }
@@ -419,6 +430,7 @@ export default {
 	width: 100%;
 	bottom: 0;
 }
+
 .spzje {
 	width: 66.6%;
 	position: relative;

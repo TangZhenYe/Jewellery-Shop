@@ -72,11 +72,14 @@ export default {
 				if (value.data.status === 10001) {
 					that.showDialog('已完成!')
 					setTimeout(function () {
-						that.toBack()
+						that.goBack()
 					}, 1500)
 				}
 			})
 		},
+	},
+	mounted () {
+		this.getShare()
 	},
 }
 </script>

@@ -104,11 +104,14 @@ export default {
 				if (value.data.status === 10001) {
 					that.showDialog('申请售后成功!')
 					setTimeout(function () {
-						that.toBack()
+						that.goBack()
 					}, 1500)
 				}
 			})
 		},
+	},
+	mounted () {
+		this.getShare()
 	},
 }
 </script>

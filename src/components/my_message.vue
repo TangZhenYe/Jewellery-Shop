@@ -98,6 +98,7 @@ export default {
 		}
 	},
 	mounted () {
+		this.getShare()
 		let that = this
 		that.c_ajax({}, 'api.php?c=User&a=detail', function (value) {
 			if (value.data.status === 10001) {
@@ -234,7 +235,7 @@ export default {
 					that.setLocalObj('areaLists', that.areaLists)
 					that.showDialog('修改成功!')
 					setTimeout(function () {
-						that.toBack()
+						that.goBack()
 					}, 1500)
 				}
 			})

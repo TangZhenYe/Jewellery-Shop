@@ -156,13 +156,16 @@ export default {
 					that.setLocalObj('addressList_' + value.data.id, { provinceLists: that.provinceLists, cityLists: that.cityLists, areaLists: that.areaLists, })
 					that.showDialog('添加成功!')
 					setTimeout(function () {
-						that.toBack()
+						that.goBack()
 					}, 1500)
 				} else {
 					that.showDialog(value.data.msg)
 				}
 			})
 		},
+	},
+	mounted () {
+		this.getShare()
 	},
 }
 </script>

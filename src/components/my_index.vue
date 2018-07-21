@@ -209,6 +209,9 @@ export default {
 			window.location.href = 'tel://' + this.callPhone
 		},
 	},
+	mounted () {
+		this.getShare()
+	},
 }
 </script>
 
