@@ -3,11 +3,11 @@
 		<div class="list">
 			<div class="per-list">
 				<span class="tl fl text-style">姓名</span>
-				<input placeholder="请输入姓名" v-model="name" type="text" class="width-150 fr tr input-style" name="">
+				<input placeholder="请输入姓名" v-model="name" type="text" class="fr tr input-style" style="width: 150px;">
 			</div>
 			<div class="per-list">
 				<span class="tl fl text-style">手机号码</span>
-				<input placeholder="请输入手机号" v-model='phone' type="text" class="width-150 fr tr input-style">
+				<input placeholder="请输入手机号" v-model='phone' type="text" class="fr tr input-style" style="width: 150px;">
 			</div>
 			<div class="per-list">
 				<span class="tl fl text-style">省份</span>
@@ -40,7 +40,7 @@
 				<span class="tl fl text-style">详细地址</span>
 				<input placeholder="请输入详细地址" v-model='address' type="text" class=" fr tr ellip input-style">
 			</div>
-			<label :class="{'check-picture': checkPicture}" @click='defaultAddress()' class="default-address">设为默认地址</label>
+			<label :class="{'check-picture': checkPicture}" @click='defaultAddress()' class="default-address c font-size-15">设为默认地址</label>
 		</div>
 		<div @click="saveAddress()" class="white tc bottom-box">
 			保存
@@ -247,12 +247,10 @@ export default {
 
 .default-address {
 	padding: 10px 25px;
-	cursor: pointer;
 	background: url(../../static/img/no_check.png) no-repeat;
 	background-position: 0px 13px;
 	background-size: 15px;
 	line-height: 37px;
-	font-size: 15px;
 }
 
 .check-picture {
@@ -260,13 +258,9 @@ export default {
 	background-position: 0px 13px;
 	background-size: 15px;
 }
-.width-150 {
-	width: 150px;
-}
 
 .pad {
 	padding: 0;
 }
-
 
 </style>

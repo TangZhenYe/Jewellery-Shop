@@ -160,6 +160,7 @@
 </template>
 <script>
 
+
 export default {
 	name: 'my_index',
 	data () {
@@ -178,6 +179,7 @@ export default {
 	created () {
 		let that = this
 		that.$store.commit('updateTitleMsg', { title_msg: '我的', })
+    that.$store.commit('updateCountNum', {countNum: 4})
 		that.c_ajax({}, 'api.php?c=User&a=detail', function (value) {
 			that.myIndexLists.push(value.data.detail)
 			if (value.data.detail.user_info) {

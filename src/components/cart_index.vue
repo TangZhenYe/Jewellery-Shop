@@ -1,6 +1,6 @@
 <template>
 	<div class="cart_index box">
-		<div class="top-box-box border-bottom-1">
+		<div class="white-b" style="border-bottom: 1px solid #f3f2f2;">
 			<div class="gray-666 tl top-box">
 				<div ref='allSelect' class="check-box" @click='check($event, 1, "")'></div>
 				全选
@@ -60,10 +60,11 @@ export default {
 	created () {
 		let that = this
 		that.$store.commit('updateTitleMsg', { title_msg: '购物车', })
+    that.$store.commit('updateCountNum', {countNum: 3})
 		that.getCartList()
 	},
 	components: {
-		footerBox: require('./footerBox').default,
+    footerBox: require('./footerBox').default,
 	},
 	methods: {
 		//获取购物车列表
@@ -237,10 +238,6 @@ export default {
 	line-height: 38px;
 }
 
-.top-box-box {
-	background-color: #fff;
-}
-
 .check-box {
 	position: absolute;
 	left: 0;
@@ -265,7 +262,7 @@ export default {
 	padding: 8px 16px 10px 135px;
 	height: 100px;
 	position: relative;
-	border-bottom: 1px solid #ccc;
+	border-bottom: 1px solid #f3f2f2;
 }
 .per-list-img {
 	position: absolute;
@@ -327,9 +324,8 @@ export default {
 	background-position: 3px 4px;
 }
 .bottom-box {
-	border-top:1px solid #ddd;
+	border-top: 1px solid #f3f2f2;
 	background-color: #FEFEFF;
-	padding:0;
 	height: 42px;
 	position: fixed;
 	width: 100%;

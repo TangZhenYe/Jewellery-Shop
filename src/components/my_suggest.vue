@@ -4,7 +4,7 @@
 		<div class="text-area-box">
 			<textarea v-model="textAreaValue" placeholder="请填写反馈意见....."></textarea>
 		</div>
-		<div @click="submitSuggest" class="tb linear white footer-box">提交反馈</div>
+		<div @click="submitSuggest" class="tb red-b white footer-box">提交反馈</div>
 	</div>
 </template>
 <script>

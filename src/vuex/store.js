@@ -7,11 +7,12 @@ Vue.use(Vuex)
 const state = {
 	token: '',
 	token_time: '',
-	title_msg: '',
+	title_msg: '首页',
 	parent_id: '',
 	debug: 'false', // 是否开启微信分享调试
 	scopeImgUrl: 'http://www.taiwaskii.com/app/zhubaoshangcheng/static/img/share_logo.jpg', // 分享朋友圈图片
 	check_time: 7200, // 判断时间过期的边界 7200秒 即2个小时
+	countNum: '',
 }
 
 const mutations = {
@@ -24,6 +25,9 @@ const mutations = {
 	},
 	updateTitleMsg (state, payload) {
 		state.title_msg = payload.title_msg
+	},
+	updateCountNum (state, payload) {
+		state.countNum = payload.countNum
 	},
 	updateDebug (state, payload) {
 		state.debug = payload.debug

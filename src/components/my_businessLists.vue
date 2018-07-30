@@ -12,7 +12,7 @@
 				<mu-date-picker :inputClass="{'tc': true, 'gray-666': true, }" :fullWidth="true" :underlineShow="false" @change="getNowDate($event)" :minDate="hisDate" :maxDate="nowDate" hintText="结算日期"/>
 			</div>
 		</div>
-		<div @click='searchBus()' class="white linear search-btn">查询</div>
+		<div @click='searchBus()' class="white red-b search-btn">查询</div>
 		<mu-table class="tc" :fixedHeader="true" :showCheckbox="false" ref="table">
 			<mu-thead>
 				<mu-tr>

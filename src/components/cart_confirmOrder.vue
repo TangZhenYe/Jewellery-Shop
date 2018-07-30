@@ -3,87 +3,86 @@
 		<div class="cart_confirmOrder">
 			<div v-if="!showSelectAddress">
 				<div @click="goCartAddressLists(1)">
-					<div class="reci-info">
+					<div class="font-size-15 tl pad-top-15 pad-lef-20 pad-rig-20">
 						收件人: {{ name }}
 						<span class="fr">{{ phone }}</span>
 					</div>
-					<div class="tl reci-info-2">
-						<img class="locat" src="static/img/location.png">
+					<div class="tl gray-666 pos-relative font-size-15" style="padding: 2px 40px;">
+						<img class="pos-absolute" style="width: 14px; left: 17px; top: 22%;" src="static/img/location.png">
 						{{ address }}
-						<img class="arrow" src="static/img/arrow_right.png" />
+						<img class="pos-absolute" style="right: 5px;" src="static/img/arrow_right.png" />
 					</div>
 				</div>
-				<img class="border-box" src="static/img/border.png">
+				<img class="mar-bot-15 width-100per mar-top-15 vertical-align" style="height: 10px;" src="static/img/border.png">
 			</div>
 			<div v-if="showSelectAddress">
-				<div class="select-address" @click="goCartAddressLists(1)">
+				<div class="width-100per tl gray-666 font-size-15 white-b mar-bot-15 pos-relative" style="height: 48px; padding: 13px 35px 13px 16px;" @click="goCartAddressLists(1)">
 					请选择收货地址
-					<img class="icon-style2" src="static/img/arrow_right.png" />
+					<img class="pos-absolute" style="right: 5px; bottom: 12px; " src="static/img/arrow_right.png" />
 				</div>
 			</div>
 			<div class="content-box">
-				<div class="get-goods">
+				<div class="pad-lef-16 white-b tl font-size-16 per-line-42 gray-666">
 					您所选购的商品
 				</div>
-				<div class="goods-detail-box">
-					<div v-for="goodsList in goodsLists" class="goods-detail">
-						<img :src="urlPrefix + goodsList.img_thumb">
-						<div class="ellip tl goods-name">
+				<div class="white-b width-100per">
+					<div v-for="goodsList in goodsLists" class="mar-lef-16 white-b border-top-1 pos-relative height-100" style="padding: 8px 16px 10px 90px;">
+						<img :src="urlPrefix + goodsList.img_thumb" class="pos-absolute" style="top: 10px; left: 0; width: 80px;">
+						<div class="ellip tl width-50per">
 							{{ goodsList.goods_name }}
 						</div>
-						<div class="goods-money">
-
+						<div class="tl red">
 							￥{{ (Number(goodsList.promote_price) === 0) ? Number(goodsList.shop_price).toFixed(2) : Number(goodsList.promote_price).toFixed(2) }}
 						</div>
-						<div class="goods-number">
+						<div class="pos-absolute red" style="right: 10px; top: 10px;">
 							x{{ goodsList.amount }}
 						</div>
-						<div v-show="share_grade_id && share_grade_id !== 0" class="black give-points">
+						<div v-show="share_grade_id && share_grade_id !== 0" class="black pos-absolute" style="right: 10px; bottom: 10px; ">
 							代理折扣: {{ Number(goodsList.share_discount * 100).toFixed(0) }}%
 							折后价格: ￥{{ Number(goodsList.price).toFixed(2) }}
 						</div>
-						<div v-show="!share_grade_id" class="black give-points">
+						<div v-show="!share_grade_id" class="black pos-absolute" style="right: 10px; bottom: 10px; ">
 							积分: {{ parseInt(goodsList.give_points) }}
 						</div>
 
 					</div>
-					<div class="bor-top list gray-666">
-						<div class="per-list gray-666" @click="openDialog()">
-							<input placeholder="选填:给商家留言(45字以内)" v-model="leaveMessage" class="tl ellip leave-message-input fl">
-							<img class="fr img-style" src="static/img/arrow_right.png" />
+					<div class="gray-666 border-top-1 white-b font-size-15 mar-bot-20 pos-relative" style="padding-top: 1px; padding-bottom: 1px;">
+						<div class="height-40 pad-top-10 pad-bot-10 pad-lef-16 pad-rig-16 font-size-16 gray-666" @click="openDialog()">
+							<input placeholder="选填:给商家留言(45字以内)" v-model="leaveMessage" class="tl ellip fl font-size-13 width-80per input-cus">
+							<img class="fr" style="width: 24px; margin-right: -7px;" src="static/img/arrow_right.png" />
 						</div>
-						<div class="gray-444 per-list">
+						<div class="gray-444 height-40 pad-top-10 pad-bot-10 pad-lef-16 pad-rig-16 font-size-16">
 							<span class="fl">商品金额</span>
 							<span class="fr">￥{{ Number(total_goods_price).toFixed(2) }}</span>
 						</div>
-						<div class="gray-444 per-list">
+						<div class="gray-444 height-40 pad-top-10 pad-bot-10 pad-lef-16 pad-rig-16 font-size-16">
 							<span class="fl">运费</span>
 							<span class="fr">{{ shipping_fee }}元</span>
 						</div>
 					</div>
 				</div>
-				<div class="list gray-666">
+				<div class="gray-666 white-b font-size-15 mar-bot-20 pos-relative" style="padding-top: 1px; padding-bottom: 1px;">
 					<template v-if="!share_grade_id">
-						<div class="per-list" @click='changePayImage($event)'>
+						<div class="height-40 pad-top-10 pad-bot-10 pad-lef-16 pad-rig-16 font-size-16" @click='changePayImage($event)'>
 							<span class="fl">可用积分抵扣 <span class="red">{{ Number(exchange_price2).toFixed(2) }}</span> 元</span>
-							<img class="fr" :src="payPicture3" />
+							<img class="fr" style="width: 48px;	height: 24px;" :src="payPicture3" />
 						</div>
 					</template>
-					<div class="per-list">
+					<div class="height-40 pad-top-10 pad-bot-10 pad-lef-16 pad-rig-16 font-size-16">
 						<span class="fl">微信支付</span>
-						<img class="fr" :src="payPicture" />
+						<img class="fr" style="width: 48px;	height: 24px;" :src="payPicture" />
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="bottom-box">
-			<div class="fl tl spzje">
+		<div class="white-b	width-100per pos-fixed border-top-1 height-42" style="bottom: 0;">
+			<div class="fl tl pos-relative font-size-15 pad-top-5 pad-rig-10 pad-bot-5 pad-lef-20 height-42" style="width: 66.6%; line-height: 32px;">
 				实付: <span class="red">￥{{ Number(real_fee).toFixed(2) }}</span>
 			</div>
-			<div class="white fl linear tc ljgm" @click="buyGoods($event)">提交</div>
+			<div class="white fl red-b tc font-size-16 per-line-42" style="width: 33.3%;" @click="buyGoods($event)">提交</div>
 		</div>
 		<mu-dialog :open="dialog2" title="留言" @close="closeDialog">
-			<textarea class="leave-textarea" v-model="leaveMessage" maxlength="45" rows="4" type="text" placeholder="选填:给商家留言(45字以内)" name=""></textarea>
+			<textarea class="width-100per" v-model="leaveMessage" maxlength="45" rows="4" type="text" placeholder="选填:给商家留言(45字以内)" name=""></textarea>
 			<mu-flat-button slot="actions" @click="closeDialog" primary label="删除留言"/>
 			<mu-flat-button slot="actions" primary @click="getLeaveMessage" label="确定"/>
 		</mu-dialog>
@@ -263,203 +262,4 @@ export default {
 	touch-action: pan-y;
 	-webkit-overflow-scrolling: touch;
 }
-
-.leave-textarea {
-	width: 100%;
-}
-
-.reci-info {
-	font-size: 15px;
-	text-align: left;
-	padding: 15px 20px 0;
-}
-
-.reci-info-2 {
-	padding: 2px 40px 2px 40px;
-	text-overflow: clip;
-	white-space: normal;
-	color: #666;
-	position: relative;
-	font-size: 15px;
-	position: relative;
-}
-
-.reci-info-2 .locat {
-	width: 14px;
-	position: absolute;
-	left: 17px;
-	top: 22%;
-}
-
-.reci-info-2 .arrow {
-	position: absolute;
-	right: 5px;
-}
-
-.select-address {
-	width: 100%;
-	height: 48px;
-	padding: 13px 35px 13px 16px;
-	text-align: left;
-	color: #666;
-	font-size: 15px;
-	background-color: #fff;
-	margin-bottom: 15px;
-	position: relative;
-}
-
-.border-box {
-	vertical-align: bottom;
-	margin-top: 15px;
-	height: 10px;
-	width: 100%;
-	margin-bottom: 15px;
-}
-
-.icon-style {
-	position: absolute;
-	right: 5px;
-	top: 0px;
-}
-
-.icon-style2 {
-	position: absolute;
-	right: 5px;
-	bottom: 12px;
-}
-
-.get-goods {
-	padding-left: 16px;
-	background-color: #fff;
-	text-align: left;
-	font-size: 16px;
-	height: 42px;
-	line-height: 42px;
-	color: #666;
-}
-
-.bor-top {
-	border-top: 1px solid #ccc;
-}
-
-.goods-detail-box {
-	background-color: #fff;
-	width: 100%;
-}
-
-.goods-detail {
-	border-top: none; 
-	padding: 8px 16px 10px 90px;
-	margin-left: 16px;
-	border-top: 1px solid #ccc;
-	position: relative;
-	background-color: #fff;
-	height: 100px;
-}
-
-.goods-detail img {
-	position: absolute;
-	top: 10px;
-	left: 0;
-	width: 80px;
-	height: 80px;
-}
-
-.goods-name {
-	width: 50%;
-}
-
-.goods-money {
-	color: #df2a2b;
-	text-align: left;
-}
-
-.goods-number {
-	position: absolute;
-	right: 10px;
-	top: 10px;
-	color: #df2a2b;
-}
-
-.give-points {
-	position: absolute;
-	right: 10px;
-	bottom: 10px;
-}
-
-.list {
-	position: relative;
-	padding-top: 1px;
-	padding-bottom: 1px;
-	padding-left: 0;
-	margin-bottom: 20px;
-	background-color: #fff;
-	font-size: 15px;
-}
-
-.per-list {
-	height: 40px;
-	padding: 10px 16px;
-	font-size: 16px;
-}
-
-.per-list img {
-	height: 24px;
-	width: 48px;
-}
-
-.per-list .img-style {
-	width: 24px;
-	height: 24px;
-	margin-right: -7px;
-}
-
-.leave-message-input {
-	font-size: 13px;
-	width: 80%;
-	border: 0;
-	outline: none;
-}
-
-.bottom-box {
-	border-top:1px solid #ddd;
-	background-color: #FEFEFF;
-	padding:0;
-	height: 42px;
-	position: fixed;
-	width: 100%;
-	bottom: 0;
-}
-
-.spzje {
-	width: 66.6%;
-	position: relative;
-	height: 42px;
-	padding: 5px 10px 5px 20px;
-	font-size: 15px;
-	line-height: 32px;
-}
-.spzje-img {
-	width: 15px;
-	background-color: #000;
-	border-radius: 50%;
-	height: 15px;
-	margin-top: 5px;
-	background-size: 10px 7px;
-	background-repeat: no-repeat;
-}
-.spzje-money {
-	font-size: 16px;
-}
-.ljgm {
-	width: 33.3%;
-	height: 42px;
-	line-height: 42px;
-	font-size: 16px;
-}
-
-.content-box {
-	background-color: #F3F5F7;
-}
-
 </style>

@@ -3,7 +3,7 @@ import Vue from 'vue'
 // 回调ajax
 Vue.prototype.c_ajax = function (p, u, c) {
 	p.token = this.$store.state.token
-	this.$ajax.post(this.urlPrefix + u, this.$qs.stringify(p)).then(value => { c(value) })
+	this.$ajax.post(this.urlPrefix + u, this.$qs.stringify(p)).then(value => c(value))
 }
 // 获取本地存储
 Vue.prototype.getLocalObj = function (n) {
@@ -24,8 +24,8 @@ Vue.prototype.is_weixin = function () {
 }
 // 提取链接里的n
 Vue.prototype.getQueryString = function (n) {
-	let a = window.location.hash.split("?")[1], r = new RegExp("(^|&)" + n + "=([^&]*)(&|$)")
-	if (a) { let r = a.match(r); return (r !== null) ? decodeURIComponent(r[2]) : null }
+	let a = window.location.hash.split("?")[1], t = new RegExp("(^|&)" + n + "=([^&]*)(&|$)")
+	if (a) { let r = a.match(t); return (r !== null) ? decodeURIComponent(r[2]) : null }
 	return null
 }
 // 时间戳转时间 3个组合

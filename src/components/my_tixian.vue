@@ -88,7 +88,7 @@
 					<span class="tl fl text-style text-style-t">您需要缴纳个人所得税金为&nbsp;{{ tax }}&nbsp;元,我们依法代扣代缴</span>
 				</div>
 			</div>
-			<div @click="tixian()" class="linear white tc sub">提交</div>
+			<div @click="tixian()" class="red-b white tc sub">提交</div>
 		</div>
 	</div>
 </template>

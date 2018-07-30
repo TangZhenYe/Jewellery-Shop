@@ -63,7 +63,7 @@
 				<input placeholder="请输入详细地址" v-model='address' type="text" class="fr tr input-style ellip">
 			</div>
 		</div>
-		<div @click="saveUserInfo()" class="bottom-box tc white linear">修改完成</div>
+		<div @click="saveUserInfo()" class="bottom-box tc white red-b">修改完成</div>
 	</div>
 </template>
 <script>

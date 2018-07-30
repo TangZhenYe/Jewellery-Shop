@@ -41,7 +41,7 @@ export default {
 	left: 0;
 	bottom: 0;
 	background-color: #ffffff;
-	border-top: 1px solid #cccccc;
+	border-top: 1px solid #f3f2f2;
 	z-index: 9999;
 	font-size: 11px;
 }

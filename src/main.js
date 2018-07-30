@@ -15,7 +15,7 @@ import './global.js'
 import './global_methods.js'
 import './global_router.js'
 import './vConsole.js'
-import './global.css'
+import './global.scss'
 
 Vue.use(dialog)
 Vue.use(MuseUI)

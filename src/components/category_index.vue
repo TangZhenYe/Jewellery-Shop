@@ -22,6 +22,7 @@
 			</div>
 		</div>
 		<footerBox :count='2'></footerBox>
+
 	</div>
 </template>
 
@@ -42,6 +43,8 @@ export default {
 	created () {
 		let that = this
 		that.$store.commit('updateTitleMsg', { title_msg: '分类', })
+    that.$store.commit('updateCountNum', {countNum: 2})
+
 		that.c_ajax({}, 'api.php?c=ShopCategory&a=lists', function (value) {
 			if (value.data.status === 10001) {
 				for (let v of value.data.lists) {

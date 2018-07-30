@@ -8,6 +8,7 @@ Vue.prototype.goCartIndex = function () {
 }
 // 首页
 Vue.prototype.goShopIndex = function () {
+	this.$store.commit('updateCountNum', {countNum: 1})
 	this.$router.push({ name: 'shop_index', path: './shop_index', })
 }
 // 分类

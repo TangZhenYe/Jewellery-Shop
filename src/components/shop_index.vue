@@ -1,27 +1,25 @@
 <template>
-  <div class="jewel-index white-b">
+  <div class="white-b mar-bot-50" style="margin-top: 128px;">
     <div class="white tc header-box">
       <div class="arrow-left-icon">
         <mu-icon @click='goBack()' class="icon-arrow-back" value="arrow_back"/>
       </div>
       <span>首页</span>
     </div>
-    <div class="header-box-2 tc white-b">
-      <mu-icon @click="goCategoryRecommended()" class="icon-search" value="search"/>
-      <img @click='goLocation()' class="logo" src="static/img/logo.png"/>
-      <img class="sort-style" @click="changeSortType($event)" src="static/img/sort2.png"/>
+    <div class="tc white-b pos-fixed width-100per border-bottom-1 z-index-999 height-42" style="top: 43px;">
+      <mu-icon @click="goCategoryRecommended()" class="pos-absolute" style="left: 13px; top: 8.5px; width: 24px;" value="search"/>
+      <img @click='goLocation()' class="mar-top-14 height-15" style="width: 130px;" src="static/img/logo.png"/>
+      <img class="pos-absolute" style="width: 20px; top: 12px; right: 10px;" @click="changeSortType($event)" src="static/img/sort2.png"/>
     </div>
-    <div class="ad-box1">
-      <div class="content-box-logo">
-        <img class="content-box-logo-img another-img" :src="newGoodsSaleUrl"/>
-      </div>
+    <div class="white-b width-100per" style="margin-top: -45px;">
+      <img class="width-100per vertical-align" :src="newGoodsSaleUrl"/>
     </div>
-    <swiper class="swiper white-b" ref="mySwiper">
+    <swiper class="pad-top-20 pad-bot-20 white-b">
       <swiper-slide v-for="n in Number(goodsAdSortsLength)" :key="n">
-        <div class="goods-ad-sort-box white-b">
+        <div class="white-b" :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex', '-moz-box', '-webkit-flex'] }" style="flex-wrap: wrap;">
           <div @click="goCategoryRecommended(goodsAdSort.cate_id)" v-if="index >= (n-1) * 4 && index < n * 4" class="tc pos-relative width-25per" v-for="(goodsAdSort, index) in goodsAdSorts">
-            <div class="goods-ad-sort-logo">
-              <img :src="goodsAdSort.img_thumb">
+            <div class="width-90per" style="margin: 0 auto;">
+              <img class="width-100per border-rad-50per" :src="goodsAdSort.img_thumb">
             </div>
             <div class="mar-top-5">
               {{ goodsAdSort.cat_name }}
@@ -30,35 +28,37 @@
         </div>
       </swiper-slide>
     </swiper>
-    <div class="ad-box2">
-      <img class="content-box-logo-img another-img" :src="adTwoUrl"/>
+    <div class="white-b">
+      <img class="width-100per vertical-align" :src="adTwoUrl"/>
     </div>
-    <div :class="{'fixed-little-sort': fixedLittleSort }" class="little-sort-box border-bottom-1 white-b">
-      <div :class="{'mar-top-5': i > 3 }" @click='getSelectSort(littleSort.id)' :id="littleSort.id" v-for="(littleSort, i) in littleSorts" class="ellip tc black per-little-sort per-line-30 font-size-12 pos-relative">
+    <div :class="{'fixed-little-sort z-index-99999 pos-fixed width-100per': fixedLittleSort }" class="border-bottom-1 white-b pad-lef-10 pad-rig-10 pad-top-5 pad-bot-5" :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex', '-moz-box', '-webkit-flex'] }" style="flex-flow: row wrap; justify-content: space-between;">
+      <div :class="{'mar-top-5': i > 3 }" @click='getSelectSort(littleSort.id)' :id="littleSort.id" v-for="(littleSort, i) in littleSorts" class="ellip tc black width-24per per-line-30 font-size-12 pos-relative border-rad-5" style="background-color: #F0F2F5;">
         {{ littleSort.name }}
       </div>
     </div>
     <div class="white-b">
       <littleSortBox :flag="!flag" :little-sort-contents="littleSortContents"></littleSortBox>
     </div>
-    <div class="ad-box2 mar-top-10">
-      <img class="content-box-logo-img another-img" :src="adThreeUrl"/>
+    <div class="white-b mar-top-10">
+      <img class="width-100per vertical-align" :src="adThreeUrl"/>
     </div>
     <div v-if="hideBetweenAd">
       <div class="white-b">
         <littleSortBox :flag="!flag" :little-sort-contents="lastLittleSortContents"></littleSortBox>
       </div>
     </div>
-    <div @click='loadMore' class="per-line-30 white-b mar-top-10">{{ loadMsg }}</div>
-    <div class="ad-box2 mar-top-10">
-      <img class="content-box-logo-img another-img" :src="adFourUrl"/>
+    <div class="per-line-30 white-b mar-top-10">{{ loadMsg }}</div>
+    <div class="white-b mar-top-10">
+      <img class="width-100per vertical-align" :src="adFourUrl"/>
     </div>
     <div class="hide-box none-style" v-show="followPublic">
-      <div class="white-b erweima" id="erweima">
+      <div class="white-b pos-absolute width-90per" style="left: 5%; top: 50%;" id="erweima">
         <img style="margin: 0; padding: 0; height: 100%; width: 100%;" src="static/img/erweima.jpg">
       </div>
     </div>
-    <footerBox :count='1'></footerBox>
+
+    <footerBox :count="1"></footerBox>
+
   </div>
 </template>
 <script>
@@ -67,7 +67,6 @@ export default {
   components: {
     littleSortBox: require('./littleSortBox').default,
     footerBox: require('./footerBox').default,
-    headerBox: require('./headerBox').default,
   },
   data () {
     return {
@@ -92,11 +91,13 @@ export default {
       scrollTop: 0,
       followPublic: '',
       test: 'static/img/share_logo.jpg',
+      isLoading: true,
     }
   },
   created () {
     console.log('首页 created')
     let that = this
+    that.$store.commit('updateCountNum', {countNum: 1})
     that.c_ajax({}, 'api.php?c=User&a=is_subscribe', function (value) {
       that.followPublic = (value.data.is_subscribe === 0) ? true : false
     })
@@ -198,6 +199,7 @@ export default {
       let that = this
       that.c_ajax({num: that.num, p: that.count++}, 'api.php?c=ShopGoods&a=lists', function (value) {
         if (value.data.status === 10001) {
+          that.isLoading = true
           for (let v of value.data.lists) {
             that.lastLittleSortContents.push(v)
           }
@@ -208,7 +210,7 @@ export default {
     },
     changeSortType (e) {
       this.flag = !this.flag
-      let str = 'static/img/sort', a = (this.flag) ? 2 : ""
+      let [str, a] = ['static/img/sort', (this.flag) ? 2 : ""]
       e.currentTarget.src = str + a + '.png'
     },
     goLocation () {
@@ -217,10 +219,13 @@ export default {
     handleScroll () {
       this.scrollTop = $(window).scrollTop()
       this.fixedLittleSort = (this.scrollTop >= 650) ? true : false
-      console.log(this.scrollTop)
-      // if (this.scrollTop === 3400) {
-      //   this.loadMore()
-      // }
+
+      let bottomOfWindow = document.documentElement.offsetHeight - this.scrollTop - window.innerHeight
+      if (bottomOfWindow <= 200 && this.isLoading) {
+        this.isLoading = false
+        this.loadMore()
+      }
+
     },
     getSelectSort (parentId) {
       if (this.scrollTop >= 700) {
@@ -244,11 +249,14 @@ export default {
 }
 </script>
 
+
 <style scoped>
-.jewel-index {
-  margin-top: 128px;
-  margin-bottom: 50px;
+
+.fixed-little-sort {
+  top: 85px;
+  left: 0;
 }
+
 .header-box {
   height: 43px;
   border-bottom: 1px solid #000;
@@ -275,109 +283,4 @@ export default {
   left: 0;
   top: 0;
 }
-.header-box-2 {
-  position: fixed;
-  top: 43px;
-  box-shadow: 0 8px 8px #ddd;
-  width: 100%;
-  height: 42px;
-  z-index: 999;
-}
-.logo {
-  margin-top: 14px;
-  height: 15px;
-  width: 130px;
-}
-.icon-search {
-  position: absolute;
-  left: 13px;
-  top: 8.5px;
-  width: 24px;
-  height: 24px;
-}
-.sort-style {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  top: 12px;
-  right: 10px;
-}
-.ad-box1 {
-  width: 100%;
-  line-height: 0;
-}
-.content-box-logo {
-  background: rgb(255, 255, 255);
-  margin-top: -45px;
-}
-.ad-box2 {
-  line-height: 0;
-  background: rgb(255, 255, 255);
-}
-.content-box-logo-img {
-  height: 100%;
-}
-.goods-ad-sort-box {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  flex-wrap: wrap;
-}
-.goods-ad-sort-logo {
-  width: 90%;
-  margin: 0 auto;
-}
-.goods-ad-sort-logo img {
-  width: 100%;
-  border-radius: 50%;
-}
-.little-sort-box {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  padding: 10px;
-  padding-bottom: 5px;
-  padding-top: 5px;
-}
-.per-little-sort {
-  width: 24%;
-  background-color: #F0F2F5;
-  border-radius: 5px;
-}
-.fixed-little-sort {
-  position: fixed;
-  top: 85px;
-  left: 0;
-  width: 100%;
-  z-index: 99999;
-}
-.search-goods {
-  padding: 11px 0;
-  color: #b8b8b8;
-}
-
-.another-img {
-  height: auto;
-  width: 100%;
-  line-height: 0;
-}
-
-.swiper {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-.erweima {
-  width: 90%;
-  left: 5%;
-  top: 50%;
-  position: absolute;
-}
-
 </style>

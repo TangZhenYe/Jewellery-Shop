@@ -2,29 +2,29 @@
 	<div>
 		<div class="cart_addressLists">
 			<div class="list">
-				<div :id="addressList.id" class="per-list" v-for="(addressList, i) in addressLists" @click='changeDefault(addressList.id)'>
-					<div class="per-list-box">
-						<p class="per-list-info">
+				<div :id="addressList.id" class="white-b mar-top-10 pad-top-16" v-for="(addressList, i) in addressLists" @click='changeDefault(addressList.id)'>
+					<div class="over-hidden">
+						<p class="font-size-15 black mar-bot-5 pad-lef-16 pad-rig-16 over-hidden">
 							<span class="fr">{{ addressList.phone }}</span>
 							<span class="fl">收货人：{{ addressList.name }}</span>
 						</p>
-						<p class="fl per-list-address">
+						<p class="fl mar-bot-6 pad-lef-16 pad-rig-16">
 							{{ addressList.address }}
 						</p>
 					</div>
-					<div class="operation">
+					<div class="over-hidden pad-lef-16 pad-rig-16 pad-top-5 pad-bot-5" style="border-top: 1px dashed #ddd;">
 						<div class="tl fl width-50per">
-							<label :class="{'check-picture': Number(addressList.type) === 1 }" class="default-address">设为默认地址</label>
+							<label :class="{'check-picture': Number(addressList.type) === 1 }" class="default-address c font-size-15">设为默认地址</label>
 						</div>
 						<div class="fl width-50per">
-							<span class="edit-delete-btn" @click.stop="deleteAddress(addressList.id)">删除</span>
-							<span class="edit-delete-btn" @click.stop='goCartEditAddress(addressList.is_receive, addressList.id)'>编辑</span>
+							<span class="font-size-15 tc border-rad-5 width-40per mar-lef-10 per-line-35 gray-999 fr border-1 display-in-block" @click.stop="deleteAddress(addressList.id)">删除</span>
+							<span class="font-size-15 tc border-rad-5 width-40per mar-lef-10 per-line-35 gray-999 fr border-1 display-in-block" @click.stop='goCartEditAddress(addressList.is_receive, addressList.id)'>编辑</span>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div @click="goCartNewAddress(1)" class="white tc bottom-box">
+		<div @click="goCartNewAddress(1)" class="white tc pos-fixed per-line-42 font-size-17 width-100per" style="bottom: 0; left: 0; background-color: rgb(223, 44, 45);">
 			新增收货地址
 		</div>
 	</div>
@@ -119,61 +119,12 @@ export default {
 	-webkit-overflow-scrolling: touch;
 }
 
-.per-list {
-	border: none;
-	margin-top: 10px;
-	white-space: normal;
-	overflow: auto;
-	text-overflow: clip; 
-	padding: 16px 0px 0px;
-	background-color: #fff;
-}
-
-.per-list-info {
-	font-size: 15px;
-	color: #000;
-	margin-bottom: 5px;
-	padding: 0 16px;
-	overflow: hidden;
-}
-
-.per-list-address {
-	white-space: normal;
-	overflow: auto;
-	text-overflow: clip;
-	padding: 0 16px;
-	margin-bottom: 6px;
-}
-
-.bottom-box {
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	background-color: rgb(223, 44, 45);
-	height: 42px;
-	width: 100%;
-	font-size: 17px;
-	line-height: 42px;
-}
-
-.operation {
-	padding: 5px 16px;
-	border-top: 1px dashed #ddd;
-	overflow: hidden;
-}
-
-.per-list-box {
-	overflow: hidden;
-}
-
 .default-address {
 	padding: 10px 25px;
-	cursor: pointer;
 	background: url(../../static/img/no_check.png) no-repeat;
 	background-position: 0px 13px;
 	background-size: 15px;
 	line-height: 37px;
-	font-size: 15px;
 }
 
 .check-picture {
@@ -181,20 +132,5 @@ export default {
 	background-position: 0px 13px;
 	background-size: 15px;
 }
-
-.edit-delete-btn {
-	display: inline-block;
-	font-size: 15px;
-	text-align: center;
-	border: 1px solid #ddd;
-	border-radius: 5px;
-	width: 40%;
-	line-height: 35px;
-	height: 35px;
-	color: #999;
-	float: right;
-	margin-left: 10px;
-}
-
 
 </style>

@@ -25,7 +25,7 @@
 				<div class="fl gray-666 width-67per tl">
 					已选（{{ count }}）
 				</div>
-				<div @click="deleteCollectGoods()" class="white fr width-33per linear tc">删除</div>
+				<div @click="deleteCollectGoods()" class="white fr width-33per red-b tc">删除</div>
 			</div>
 		</template>	
 	</div>
